@@ -10,8 +10,16 @@ $env:EZA_CONFIG_DIR = "C:\Users\daich\OneDrive\ドキュメント\PowerShell\con
 # 関数設定
 # =================================
 # ディレクトリ操作
+function ls {
+    eza --icons @args
+}
+
 function ll {
-    eza -aahl --git @args
+    eza -aahl --git --icons @args
+}
+
+function la {
+    eza -aa --icons @args
 }
 
 # 引数で階層レベル指定可能
@@ -37,7 +45,8 @@ function touch {
     foreach ($file in $Files) {
         if (Test-Path $file) {
             (Get-Item $file).LastWriteTime = Get-Date
-        } else {
+        }
+        else {
             New-Item -ItemType File -Path $file -Force | Out-Null
         }
     }
@@ -65,22 +74,23 @@ Set-Alias -Name ls -Value eza
 # Yazi wrapper script loader
 # =================================
 try {
-	# スクリプトファイルのパスを設定（必要に応じて変更してください）
-	$yaziScriptPath = Join-Path $PSScriptRoot "Scripts/yazi-wrapper.ps1"
+    # スクリプトファイルのパスを設定（必要に応じて変更してください）
+    $yaziScriptPath = Join-Path $PSScriptRoot "Scripts/yazi-wrapper.ps1"
 
-	# ファイルの存在確認
-	if (Test-Path $yaziScriptPath) {
-		# スクリプトを読み込み
-		. $yaziScriptPath
-		Write-Host "✓ Yazi wrapper loaded successfully" -ForegroundColor Green
-	} else {
-		Write-Warning "Yazi wrapper script not found at: $yaziScriptPath"
-		Write-Host "Please ensure 'yazi-wrapper.ps1' is in the same directory as your profile." -ForegroundColor Yellow
-	}
+    # ファイルの存在確認
+    if (Test-Path $yaziScriptPath) {
+        # スクリプトを読み込み
+        . $yaziScriptPath
+        Write-Host "✓ Yazi wrapper loaded successfully" -ForegroundColor Green
+    }
+    else {
+        Write-Warning "Yazi wrapper script not found at: $yaziScriptPath"
+        Write-Host "Please ensure 'yazi-wrapper.ps1' is in the same directory as your profile." -ForegroundColor Yellow
+    }
 }
 catch {
-	Write-Error "Failed to load Yazi wrapper: $($_.Exception.Message)"
-	Write-Host "You can still use PowerShell, but 'y' command will not be available." -ForegroundColor Yellow
+    Write-Error "Failed to load Yazi wrapper: $($_.Exception.Message)"
+    Write-Host "You can still use PowerShell, but 'y' command will not be available." -ForegroundColor Yellow
 }
 
 # =================================
