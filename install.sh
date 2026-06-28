@@ -73,6 +73,11 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 log_info "lazygit をインストール中..."
 sudo apt install lazygit
 
+# bun のインストール
+log_info "bun をインストール中..."
+sudo apt install unzip
+curl -fsSL https://bun.com/install | bash
+
 # Docker のインストール
 log_info "Docker をインストール中..."
 # 古いバージョンを削除
