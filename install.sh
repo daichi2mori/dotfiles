@@ -69,6 +69,10 @@ curl https://mise.run | sh
 log_info "uv をインストール中..."
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
+# lazygit のインストール
+log_info "lazygit をインストール中..."
+sudo apt install lazygit
+
 # Docker のインストール
 log_info "Docker をインストール中..."
 # 古いバージョンを削除
