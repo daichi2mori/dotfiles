@@ -111,6 +111,11 @@ unset cache_dir sheldon_cache sheldon_toml
 # ------------------------------
 # ツール初期化
 # ------------------------------
+# keychain
+if command -v keychain >/dev/null 2>&1; then
+  eval $(keychain --eval ~/.ssh/github)
+fi
+
 # Starship
 eval "$(starship init zsh)"
 
@@ -120,6 +125,13 @@ eval "$(~/.local/bin/mise activate zsh)"
 # uv
 eval "$(uv generate-shell-completion zsh)"
 eval "$(uvx --generate-shell-completion zsh)"
+
+# Bun
+export PATH="/home/f0reth/bin:$PATH"
+
+# Golang
+export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:/home/f0reth/go/bin
 
 # ------------------------------
 # キーバインド
